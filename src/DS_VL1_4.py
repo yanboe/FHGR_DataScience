@@ -1,35 +1,29 @@
 import numpy as np
-import matplotlib.pyplot as plt
+from sklearn import datasets
 from sklearn.linear_model import LinearRegression as lr
+import matplotlib.pyplot as plt
 from sklearn.metrics import mean_squared_error as mse
 from sklearn.metrics import r2_score
 
-# Daten einlesen und aufbereiten
-data = np.loadtxt("../data/smp_data.txt", delimiter=",")
-x_data = data[:, 0].reshape((-1, 1))
-y_data = data[:, 1]
+# Datensatz einlesen
+diabetes_x, diabetes_y = datasets.load_diabetes(return_X_y=True)
+diabetes_x = diabetes_x[:, np.newaxis, 2]
 
 # Trainingsdaten definieren
 # Damit trainieren wir unser Modell
-x_train = x_data[: -10]
-y_train = y_data[: -10]
+x_train = diabetes_x[: -88]
+y_train = diabetes_y[: -88]
 
 # Testdaten definieren
 # Die brauchen wir als Referenz, um zu schauen, wie genau
 # unser trainiertes Modell ist
-x_test = x_data[-10:]
-y_test = y_data[-10:]
+x_test = diabetes_x[-88:]
+y_test = diabetes_y[-88:]
 
-# Plot vorbereiten
-plt.xlabel("Freunde")
-plt.ylabel("Zeit [Sekunden]")
-plt.axis([0, 12, 0, 800])
-plt.grid(True)
-
-# Modell trainieren
 model = lr()
 model.fit(x_train, y_train)
 y_pred = model.predict(x_test)
+y_pred_train = model.predict(x_train)
 
 # Testdaten einzeichnen (Kreise, 80%)
 plt.plot(x_test, y_test, ls="none", marker="o")
@@ -41,7 +35,9 @@ plt.plot(x_train, y_train, ls="none", marker="s")
 plt.plot(x_test, y_pred, 'b-')
 
 print("MSE: ", mse(y_test, y_pred))
-print("R2 Score: ", r2_score(y_test, y_pred))
+print("R2 Score (Test): ", r2_score(y_test, y_pred))
+print("R2 Score (Training): ", r2_score(y_train, y_pred_train))
 
 # Plot anzeigen
+plt.grid(True)
 plt.show()
