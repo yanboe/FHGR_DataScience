@@ -20,9 +20,14 @@ y_train = diabetes_y[: -88]
 x_test = diabetes_x[-88:]
 y_test = diabetes_y[-88:]
 
+# Modell mit Testdaten trainieren (für R2 Test)
 model = lr()
 model.fit(x_train, y_train)
 y_pred = model.predict(x_test)
+
+# Modell mit Trainingsdaten trainieren (für R2 Train)
+# So können wir schauen, ob der R2 Score bei Trainings-
+# und Testdaten ähnlich sind
 y_pred_train = model.predict(x_train)
 
 # Testdaten einzeichnen (Kreise, 80%)
@@ -34,6 +39,7 @@ plt.plot(x_train, y_train, ls="none", marker="s")
 # Regressionsgerade einzeichnen
 plt.plot(x_test, y_pred, 'b-')
 
+# MSE + R2 Score ausgeben
 print("MSE: ", mse(y_test, y_pred))
 print("R2 Score (Test): ", r2_score(y_test, y_pred))
 print("R2 Score (Training): ", r2_score(y_train, y_pred_train))
