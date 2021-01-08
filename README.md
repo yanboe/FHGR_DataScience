@@ -1,9 +1,10 @@
 # FHGR DataScience
-This repository is used to share my Python code for the Data Science module at FHGR.
 
-## Structure
-- Sample data provided by the teacher is in the "data" folder
-- Source code is in the src folder
+
+## Struktur
+- Beispieldaten sind im Ordner "data"
+- Source Code ist im Ordner "src"
+- Anleitungen sind im Ordner "guides"
 
 ## Naming
-DS_VL1_1 is the first (_1) Python program in the first week (_VL1) of this module (DS).
+DS_VL1_1 ist das erste Programm (_1) der Vorlesung 1 (VL1).
