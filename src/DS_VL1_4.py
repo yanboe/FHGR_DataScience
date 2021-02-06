@@ -30,10 +30,10 @@ y_pred = model.predict(x_test)
 # und Testdaten ähnlich sind
 y_pred_train = model.predict(x_train)
 
-# Testdaten einzeichnen (Kreise, 80%)
+# Testdaten einzeichnen (Kreise, 20%)
 plt.plot(x_test, y_test, ls="none", marker="o")
 
-# Trainingsdaten einzeichnen (Quadrate, 20%)
+# Trainingsdaten einzeichnen (Quadrate, 80%)
 plt.plot(x_train, y_train, ls="none", marker="s")
 
 # Regressionsgerade einzeichnen
